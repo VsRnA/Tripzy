@@ -1,42 +1,44 @@
 import { QueryInterface, DataTypes } from 'sequelize';
 
-const tableName = 'userRoleAssignments';
+const tableName = 'tripWaypoints';
 
 /**
- * Миграция для создания таблицы userRoleAssignments (связь users и userRoles)
+ * Миграция для создания таблицы tripWaypoints
  */
 export default {
   async up(queryInterface: QueryInterface): Promise<void> {
     await queryInterface.createTable(tableName, {
-      userGuid: {
+      guid: {
         type: DataTypes.UUID,
         primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+      },
+      tripGuid: {
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'users',
+          model: 'trips',
           key: 'guid',
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
-      roleId: {
+      address: {
+        type: DataTypes.STRING(500),
+        allowNull: false,
+      },
+      orderIndex: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
-        allowNull: false,
-        references: {
-          model: 'userRoles',
-          key: 'id',
-        },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
-      },
-      createdAt: {
-        type: DataTypes.DATE,
         allowNull: false,
       },
-      updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
+      visitDate: {
+        type: DataTypes.DATEONLY,
+        allowNull: true,
+      },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: true,
       },
     });
   },

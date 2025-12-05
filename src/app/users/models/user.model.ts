@@ -7,6 +7,8 @@ import UserRoleAssignment from '#App/userRoleAssignments/models/userRoleAssignme
 import UserRole from '#App/userRoles/models/userRole.model';
 import Client from '#App/clients/models/client.model';
 import ShopAdministrator from '#App/shopAdministrators/models/shopAdministrator.model';
+import UserTripsAssignment from '#App/userTripsAssignment/models/userTripsAssignment.model';
+import Trip from '#App/trips/models/trip.model';
 
 export type UserAttributes = Attributes<User>;
 export type UserCreationAttributes = CreationAttributes<User>;
@@ -110,5 +112,12 @@ db.associate(() => {
   User.hasMany(ShopAdministrator, {
     foreignKey: 'userGuid',
     as: 'shopAdministrators',
+  });
+
+  User.belongsToMany(Trip, {
+    through: UserTripsAssignment,
+    foreignKey: 'userGuid',
+    otherKey: 'tripGuid',
+    as: 'trips',
   });
 });

@@ -6,7 +6,7 @@ const tableName = 'userRoles';
 /**
  * Миграция для заполнения таблицы userRoles начальными ролями
  */
-module.exports = {
+export default {
   async up(queryInterface: QueryInterface): Promise<void> {
     const roles = ALL_ROLES.map((role) => ({
       name: role.name,

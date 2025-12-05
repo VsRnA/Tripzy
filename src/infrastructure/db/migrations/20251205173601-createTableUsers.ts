@@ -5,7 +5,7 @@ const tableName = 'users';
 /**
  * Миграция для создания таблицы users
  */
-module.exports = {
+export default {
   async up(queryInterface: QueryInterface): Promise<void> {
     await queryInterface.createTable(tableName, {
       guid: {

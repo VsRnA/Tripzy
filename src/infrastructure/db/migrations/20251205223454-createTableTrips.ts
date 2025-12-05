@@ -1,46 +1,56 @@
 import { QueryInterface, DataTypes } from 'sequelize';
 
-const tableName = 'clients';
+const tableName = 'trips';
 
 /**
- * Миграция для создания таблицы clients
+ * Миграция для создания таблицы trips
  */
 export default {
   async up(queryInterface: QueryInterface): Promise<void> {
     await queryInterface.createTable(tableName, {
-      id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-      },
       guid: {
         type: DataTypes.UUID,
+        primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
-        unique: true,
       },
       name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: false,
       },
-      apiKey: {
-        type: DataTypes.STRING,
+      goal: {
+        type: DataTypes.STRING(50),
         allowNull: false,
-        unique: true,
+        comment: 'FOR_SELF, FOR_COLLEAGUES, FOR_RELATIVES',
+      },
+      status: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+        defaultValue: 'PLANNED',
+        comment: 'PLANNED, ACTIVE, COMPLETED, CANCELLED',
+      },
+      budgetMin: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: true,
+      },
+      budgetMax: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: true,
       },
       removalMark: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false,
         allowNull: false,
+        defaultValue: false,
       },
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: DataTypes.NOW,
       },
       updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: DataTypes.NOW,
       },
     });
   },
