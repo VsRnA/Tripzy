@@ -96,7 +96,7 @@ function hashPassword(password: string): string {
 /**
  * Миграция для заполнения базы данных тестовыми данными
  */
-module.exports = {
+export default {
   async up(queryInterface: QueryInterface): Promise<void> {
     const now = new Date();
     const clients: any[] = [];

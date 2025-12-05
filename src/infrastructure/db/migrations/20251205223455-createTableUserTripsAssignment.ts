@@ -1,16 +1,21 @@
 import { QueryInterface, DataTypes } from 'sequelize';
 
-const tableName = 'userRoleAssignments';
+const tableName = 'userTripsAssignment';
 
 /**
- * Миграция для создания таблицы userRoleAssignments (связь users и userRoles)
+ * Миграция для создания таблицы userTripsAssignment
  */
 export default {
   async up(queryInterface: QueryInterface): Promise<void> {
     await queryInterface.createTable(tableName, {
-      userGuid: {
+      guid: {
         type: DataTypes.UUID,
         primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+      },
+      userGuid: {
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
           model: 'users',
@@ -19,13 +24,12 @@ export default {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
-      roleId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
+      tripGuid: {
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'userRoles',
-          key: 'id',
+          model: 'trips',
+          key: 'guid',
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
@@ -33,11 +37,19 @@ export default {
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: DataTypes.NOW,
       },
       updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: DataTypes.NOW,
       },
+    });
+
+    await queryInterface.addConstraint(tableName, {
+      fields: ['userGuid', 'tripGuid'],
+      type: 'unique',
+      name: 'unique_user_trip',
     });
   },
 
