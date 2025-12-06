@@ -1,4 +1,5 @@
 import fastify, { FastifyInstance } from 'fastify';
+import multipart from '@fastify/multipart';
 import { Handler } from './handler';
 import { errorHandler } from '#Lib/errors';
 import { Hooks } from './hooks';
@@ -21,9 +22,14 @@ export class FastifyHttpTransport {
       logger: this.#config.logger,
     });
 
+    this.#registerMultipart();
     this.hooks = new Hooks();
     this.#registerErrorHandler();
     this.handler = new Handler(this.#app, this.hooks);
+  }
+
+  #registerMultipart(): void {
+    this.#app.register(multipart);
   }
 
   #registerErrorHandler(): void {
@@ -36,6 +42,7 @@ export class FastifyHttpTransport {
 
   public async start(): Promise<void> {
     try {
+      console.log(this.#app.printRoutes());
       await this.#app.listen({ port: this.#config.port, host: this.#config.host });
       console.log(`Server is running on http://${this.#config.host}:${this.#config.port}`);
     } catch (err) {

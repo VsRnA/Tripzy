@@ -38,6 +38,27 @@ export const schema = {
     JWT_SECRET: {
       type: 'string',
       description: 'JWT secret'
+    },
+    S3_ENDPOINT: {
+      type: 'string',
+      description: 'S3 endpoint URL (Timeweb Cloud)'
+    },
+    S3_REGION: {
+      type: 'string',
+      default: 'ru-1',
+      description: 'S3 region'
+    },
+    S3_ACCESS_KEY_ID: {
+      type: 'string',
+      description: 'S3 access key ID'
+    },
+    S3_SECRET_ACCESS_KEY: {
+      type: 'string',
+      description: 'S3 secret access key'
+    },
+    S3_BUCKET: {
+      type: 'string',
+      description: 'S3 bucket name'
     }
   },
   required: [
@@ -48,6 +69,11 @@ export const schema = {
     'POSTGRES_DB',
     'POSTGRES_HOST',
     'POSTGRES_PORT',
-    'JWT_SECRET'
+    'JWT_SECRET',
+    'S3_ENDPOINT',
+    'S3_REGION',
+    'S3_ACCESS_KEY_ID',
+    'S3_SECRET_ACCESS_KEY',
+    'S3_BUCKET'
   ],
 } as const;
