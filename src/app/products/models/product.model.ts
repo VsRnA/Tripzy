@@ -5,7 +5,7 @@ import {
 import db from '#Infrastructure/sequelize';
 import Shop from '#App/shops/models/shop.model';
 import ProductAttachment from '#App/productAttachments/models/productAttachment.model';
-import ProductTag from '#App/productTags/models/productTag.model';
+import ProductAttribute from '#App/productAttributes/models/productAttribute.model';
 
 export type ProductAttributes = Attributes<Product>;
 export type ProductCreationAttributes = CreationAttributes<Product>;
@@ -79,8 +79,8 @@ db.associate(() => {
     as: 'attachments',
   });
 
-  Product.hasMany(ProductTag, {
+  Product.hasMany(ProductAttribute, {
     foreignKey: 'productGuid',
-    as: 'tags',
+    as: 'attributes',
   });
 });

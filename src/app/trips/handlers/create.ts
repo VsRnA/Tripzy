@@ -7,7 +7,7 @@ import { create as createUserTripsAssignment } from '#App/userTripsAssignment/re
 import { WaypointType } from '#App/tripWaypoints/models/tripWaypoint.model';
 import db from '#Infrastructure/sequelize';
 
-httpTransport.handler.post('/api/trips/v1/create', CreateTripSchema, async (request) => {
+httpTransport.handler.post('/api/trips/v1', CreateTripSchema, async (request) => {
   const { name, goal, budgetMin, budgetMax, cities } = request.payload;
   const userGuid = request.context.user!.guid;
 

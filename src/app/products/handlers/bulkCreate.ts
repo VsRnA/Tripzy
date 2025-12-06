@@ -7,7 +7,7 @@ import { UnauthorizedError, NotFoundError } from '#Lib/errors';
 import db from '#Infrastructure/sequelize';
 
 httpTransport.handler.post(
-  '/api/clients/v1/products/bulk',
+  '/api/clients/v1/products',
   BulkCreateProductsSchema,
   async (request) => {
     const apiKey = request.headers['x-api-key'] as string;

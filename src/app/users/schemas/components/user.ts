@@ -9,7 +9,7 @@ export const User = {
   phone: { type: ['string', 'null'], description: 'Телефон' },
   country: { type: ['string', 'null'], description: 'Страна' },
   age: { type: ['number', 'null'], description: 'Возраст' },
-  clientId: { type: ['number', 'null'], description: 'ID клиента' },
+  clientGuid: { type: ['string', 'null'], description: 'GUID клиента' },
   createdAt: { type: 'string', description: 'Дата создания' },
   updatedAt: { type: 'string', description: 'Дата обновления' },
 } as const;
@@ -61,9 +61,9 @@ export const UserParamsSchema = {
 export const UserListQuerySchema = {
   type: 'object',
   properties: {
-    email: { ...User.email, description: 'Фильтр по email' },
-    firstName: { ...User.firstName, description: 'Фильтр по имени' },
-    lastName: { ...User.lastName, description: 'Фильтр по фамилии' },
+    email: { type: 'string', description: 'Фильтр по email' },
+    firstName: { type: 'string', description: 'Фильтр по имени' },
+    lastName: { type: 'string', description: 'Фильтр по фамилии' },
     limit: {
       type: 'number',
       minimum: 1,
