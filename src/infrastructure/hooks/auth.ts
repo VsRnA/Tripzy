@@ -26,8 +26,9 @@ export async function authHook(
     done();
   } catch (error) {
     if (error instanceof UnauthorizedError) {
-      throw error;
+      done(error);
+      return;
     }
-    throw new AppError('Authentication failed');
+    done(new AppError('Authentication failed'));
   }
 }
