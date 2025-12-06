@@ -8,7 +8,7 @@ interface GetUserFilters {
   includePassword?: boolean;
 }
 
-export async function get(filters: GetUserFilters, repOptions?: FindOptions): Promise<User | null> {
+export async function get(filters: GetUserFilters, repOptions?: FindOptions) {
   const where: WhereOptions<UserAttributes> = {};
 
   if (filters.guid) {
