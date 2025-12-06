@@ -1,7 +1,7 @@
-export const BulkCreateProductTagsSchema = {
-  tags: ['ProductTags'],
-  summary: 'Массовая загрузка тегов для товаров',
-  description: 'Создает теги для товаров клиента. Требуется API ключ клиента в заголовке X-API-Key',
+export const BulkCreateProductAttributesSchema = {
+  tags: ['ProductAttributes'],
+  summary: 'Массовая загрузка атрибутов для товаров',
+  description: 'Создает атрибуты для товаров клиента. Требуется API ключ клиента в заголовке X-API-Key',
   headers: {
     type: 'object',
     properties: {
@@ -15,9 +15,9 @@ export const BulkCreateProductTagsSchema = {
   payload: {
     type: 'object',
     properties: {
-      productTags: {
+      productAttributes: {
         type: 'array',
-        description: 'Массив тегов для создания',
+        description: 'Массив атрибутов для создания',
         items: {
           type: 'object',
           properties: {
@@ -26,43 +26,44 @@ export const BulkCreateProductTagsSchema = {
               format: 'uuid',
               description: 'UUID товара',
             },
-            tag: {
+            type: {
               type: 'string',
-              enum: ['children', 'relatives', 'colleagues', 'friends', 'partner', 'parents', 'myself', 'other'],
-              description: 'Тег для системы рекомендаций',
+              enum: ['tag', 'craft_type', 'material'],
+              description: 'Тип атрибута',
+            },
+            value: {
+              type: 'string',
+              description: 'Значение атрибута',
             },
           },
-          required: ['productGuid', 'tag'],
+          required: ['productGuid', 'type', 'value'],
         },
       },
     },
-    required: ['productTags'],
+    required: ['productAttributes'],
   },
   response: {
     201: {
       type: 'object',
-      description: 'Теги успешно созданы',
+      description: 'Атрибуты успешно созданы',
       properties: {
         data: {
           type: 'object',
           properties: {
-            productTags: {
+            productAttributes: {
               type: 'array',
               items: {
                 type: 'object',
                 properties: {
                   productGuid: { type: 'string', description: 'UUID товара' },
-                  tag: {
-                    type: 'string',
-                    enum: ['children', 'relatives', 'colleagues', 'friends', 'partner', 'parents', 'myself', 'other'],
-                    description: 'Тег'
-                  },
+                  type: { type: 'string', description: 'Тип атрибута' },
+                  value: { type: 'string', description: 'Значение атрибута' },
                   createdAt: { type: 'string', description: 'Дата создания' },
                   updatedAt: { type: 'string', description: 'Дата обновления' },
                 },
               },
             },
-            count: { type: 'number', description: 'Количество созданных тегов' },
+            count: { type: 'number', description: 'Количество созданных атрибутов' },
           },
         },
       },

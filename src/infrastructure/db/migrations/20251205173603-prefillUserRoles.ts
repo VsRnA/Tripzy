@@ -1,28 +1,36 @@
 import { QueryInterface } from 'sequelize';
-import { ALL_ROLES } from '#Shared/roles';
+import { ROLES } from '#Shared/roles';
 
 const tableName = 'userRoles';
 
 /**
  * Миграция для заполнения таблицы userRoles начальными ролями
+ * Создается только роль TOURIST без привязки к клиенту
+ * Роли для организаций (clientAdmin, shopAdmin) будут создаваться в seedTestData для каждого клиента
  */
 export default {
   async up(queryInterface: QueryInterface): Promise<void> {
-    const roles = ALL_ROLES.map((role) => ({
-      name: role.name,
-      keyWord: role.keyWord,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }));
+    const roles = [
+      {
+        name: ROLES.TOURIST.name,
+        keyWord: ROLES.TOURIST.keyWord,
+        clientGuid: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ];
 
     await queryInterface.bulkInsert(tableName, roles, {});
   },
 
   async down(queryInterface: QueryInterface): Promise<void> {
-    const keyWords = ALL_ROLES.map((role) => role.keyWord);
-
-    await queryInterface.bulkDelete(tableName, {
-      keyWord: keyWords,
-    } as any, {});
+    await queryInterface.bulkDelete(
+      tableName,
+      {
+        keyWord: ROLES.TOURIST.keyWord,
+        clientGuid: null,
+      } as any,
+      {}
+    );
   },
 };

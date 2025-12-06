@@ -5,6 +5,7 @@ import { NotFoundError } from '#Lib/errors';
 interface FindUserRoleFilters {
   id?: number;
   keyWord?: string;
+  clientGuid?: string | null;
 }
 
 export async function find(filters: FindUserRoleFilters, repOptions?: FindOptions): Promise<UserRole> {
@@ -16,6 +17,10 @@ export async function find(filters: FindUserRoleFilters, repOptions?: FindOption
 
   if (filters.keyWord) {
     where.keyWord = filters.keyWord;
+  }
+
+  if (filters.clientGuid !== undefined) {
+    where.clientGuid = filters.clientGuid;
   }
 
   const role = await UserRole.findOne({

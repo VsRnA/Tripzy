@@ -21,7 +21,16 @@ export default {
       keyWord: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+      },
+      clientGuid: {
+        type: DataTypes.UUID,
+        allowNull: true,
+        references: {
+          model: 'clients',
+          key: 'guid',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },
       createdAt: {
         type: DataTypes.DATE,

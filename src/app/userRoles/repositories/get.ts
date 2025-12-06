@@ -4,6 +4,7 @@ import { WhereOptions, FindOptions } from 'sequelize';
 interface GetUserRoleFilters {
   id?: number;
   keyWord?: string;
+  clientGuid?: string | null;
 }
 
 export async function get(filters: GetUserRoleFilters, repOptions?: FindOptions): Promise<UserRole | null> {
@@ -15,6 +16,10 @@ export async function get(filters: GetUserRoleFilters, repOptions?: FindOptions)
 
   if (filters.keyWord) {
     where.keyWord = filters.keyWord;
+  }
+
+  if (filters.clientGuid !== undefined) {
+    where.clientGuid = filters.clientGuid;
   }
 
   const role = await UserRole.findOne({

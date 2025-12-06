@@ -25,7 +25,7 @@ httpTransport.handler.post('/api/auth/v1/registration', RegisterSchema, async (r
   const { user, token } = await db.runInTransaction(async (transaction) => {
     const repOptions = { transaction };
 
-    const userRole = await findRole({ keyWord: ROLES.USER.keyWord }, repOptions);
+    const userRole = await findRole({ keyWord: ROLES.TOURIST.keyWord, clientGuid: null }, repOptions);
 
     const newUser = await createUser({
       email,

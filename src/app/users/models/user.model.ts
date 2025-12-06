@@ -32,8 +32,8 @@ export default class User extends Model<InferAttributes<User>, InferCreationAttr
   declare country: string | null;
   /** Возраст пользователя */
   declare age: number | null;
-  /** Идентификатор клиента */
-  declare clientId: number | null; 
+  /** GUID клиента */
+  declare clientGuid: string | null; 
   /** Дата создания */
   declare createdAt: CreationOptional<string>;
   /** Дата обновления */
@@ -80,8 +80,8 @@ User.init({
     type: DataTypes.INTEGER,
     allowNull: true,
   },
-  clientId: {
-    type: DataTypes.INTEGER,
+  clientGuid: {
+    type: DataTypes.UUID,
     allowNull: true,
   },
   createdAt: DataTypes.DATE,
@@ -97,8 +97,8 @@ User.init({
 
 db.associate(() => {
   User.belongsTo(Client, {
-    foreignKey: 'clientId',
-    targetKey: 'id',
+    foreignKey: 'clientGuid',
+    targetKey: 'guid',
     as: 'client',
   });
 

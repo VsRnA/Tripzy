@@ -8,14 +8,24 @@ import Trip from '#App/trips/models/trip.model';
 export type TripWaypointAttributes = Attributes<TripWaypoint>;
 export type TripWaypointCreationAttributes = CreationAttributes<TripWaypoint>;
 
+/** Тип точки маршрута */
+export enum WaypointType {
+  city = 'city',
+  attraction = 'attraction',
+}
+
 export default class TripWaypoint extends Model<InferAttributes<TripWaypoint>, InferCreationAttributes<TripWaypoint>> {
   /** UUID точки маршрута */
   declare guid: CreationOptional<string>;
   /** UUID поездки */
   declare tripGuid: string;
+  /** UUID родительской точки (null для городов, guid города для достопримечательностей) */
+  declare parentGuid: string | null;
+  /** Тип точки маршрута */
+  declare type: WaypointType;
   /** Адрес точки маршрута */
   declare address: string;
-  /** Порядковый номер в маршруте */
+  /** Порядковый номер в маршруте (для городов - порядок городов, для достопримечательностей - порядок внутри города) */
   declare orderIndex: number;
   /** Дата посещения */
   declare visitDate: string | null;
@@ -31,6 +41,14 @@ TripWaypoint.init({
   },
   tripGuid: {
     type: DataTypes.UUID,
+    allowNull: false,
+  },
+  parentGuid: {
+    type: DataTypes.UUID,
+    allowNull: true,
+  },
+  type: {
+    type: DataTypes.ENUM(...Object.values(WaypointType)),
     allowNull: false,
   },
   address: {
@@ -61,5 +79,17 @@ db.associate(() => {
     foreignKey: 'tripGuid',
     targetKey: 'guid',
     as: 'trip',
+  });
+
+  TripWaypoint.belongsTo(TripWaypoint, {
+    foreignKey: 'parentGuid',
+    targetKey: 'guid',
+    as: 'parent',
+  });
+
+  TripWaypoint.hasMany(TripWaypoint, {
+    foreignKey: 'parentGuid',
+    sourceKey: 'guid',
+    as: 'attractions',
   });
 });

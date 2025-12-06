@@ -47,12 +47,12 @@ export default {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
-      clientId: {
-        type: DataTypes.INTEGER,
+      clientGuid: {
+        type: DataTypes.UUID,
         allowNull: true,
         references: {
           model: 'clients',
-          key: 'id',
+          key: 'guid',
         },
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',

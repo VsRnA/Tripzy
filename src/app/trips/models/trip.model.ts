@@ -10,15 +10,31 @@ import TripWaypoint from '#App/tripWaypoints/models/tripWaypoint.model';
 export type TripAttributes = Attributes<Trip>;
 export type TripCreationAttributes = CreationAttributes<Trip>;
 
+/** Цель поездки */
+export enum TripGoal {
+  forSelf = 'forSelf',
+  forColleagues = 'forColleagues',
+  forRelatives = 'forRelatives',
+  forFriends = 'forFriends',
+}
+
+/** Статус поездки */
+export enum TripStatus {
+  planned = 'planned',
+  active = 'active',
+  completed = 'completed',
+  cancelled = 'cancelled',
+}
+
 export default class Trip extends Model<InferAttributes<Trip>, InferCreationAttributes<Trip>> {
   /** UUID поездки */
   declare guid: CreationOptional<string>;
   /** Название поездки */
   declare name: string;
-  /** Цель поездки: FOR_SELF, FOR_COLLEAGUES, FOR_RELATIVES */
-  declare goal: string;
-  /** Статус поездки: PLANNED, ACTIVE, COMPLETED, CANCELLED */
-  declare status: CreationOptional<string>;
+  /** Цель поездки */
+  declare goal: TripGoal;
+  /** Статус поездки */
+  declare status: CreationOptional<TripStatus>;
   /** Минимальный бюджет */
   declare budgetMin: number | null;
   /** Максимальный бюджет */
@@ -42,13 +58,13 @@ Trip.init({
     allowNull: false,
   },
   goal: {
-    type: DataTypes.STRING(50),
+    type: DataTypes.ENUM(...Object.values(TripGoal)),
     allowNull: false,
   },
   status: {
-    type: DataTypes.STRING(50),
+    type: DataTypes.ENUM(...Object.values(TripStatus)),
     allowNull: false,
-    defaultValue: 'PLANNED',
+    defaultValue: TripStatus.planned,
   },
   budgetMin: {
     type: DataTypes.DECIMAL(10, 2),

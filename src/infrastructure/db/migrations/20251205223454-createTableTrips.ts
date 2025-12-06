@@ -19,15 +19,13 @@ export default {
         allowNull: false,
       },
       goal: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.ENUM('forSelf', 'forColleagues', 'forRelatives', 'forFriends'),
         allowNull: false,
-        comment: 'FOR_SELF, FOR_COLLEAGUES, FOR_RELATIVES',
       },
       status: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.ENUM('planned', 'active', 'completed', 'cancelled'),
         allowNull: false,
-        defaultValue: 'PLANNED',
-        comment: 'PLANNED, ACTIVE, COMPLETED, CANCELLED',
+        defaultValue: 'planned',
       },
       budgetMin: {
         type: DataTypes.DECIMAL(10, 2),

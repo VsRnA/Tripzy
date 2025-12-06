@@ -1,7 +1,8 @@
 export const BulkCreateShopsSchema = {
   tags: ['Shops'],
   summary: 'Массовая загрузка магазинов',
-  description: 'Создает несколько магазинов для клиента за один запрос. Требуется API ключ клиента в заголовке X-API-Key',
+  description: 'Создает несколько магазинов для клиента за один запрос. Требуется JWT авторизация и роль администратора организации. Также требуется API ключ клиента в заголовке X-API-Key',
+  security: [{ JWT: [] }],
   headers: {
     type: 'object',
     properties: {
@@ -9,8 +10,12 @@ export const BulkCreateShopsSchema = {
         type: 'string',
         description: 'API ключ клиента',
       },
+      authorization: {
+        type: 'string',
+        description: 'JWT токен в формате "JWT <token>"',
+      },
     },
-    required: ['x-api-key'],
+    required: ['x-api-key', 'authorization'],
   },
   payload: {
     type: 'object',

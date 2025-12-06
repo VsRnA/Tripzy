@@ -15,5 +15,12 @@ export const config = {
   jwt: {
     secret: env.get('JWT_SECRET'),
   },
+  s3: {
+    endpoint: env.get('S3_ENDPOINT'),
+    region: env.get('S3_REGION'),
+    accessKeyId: env.get('S3_ACCESS_KEY_ID'),
+    secretAccessKey: env.get('S3_SECRET_ACCESS_KEY'),
+    bucket: env.get('S3_BUCKET'),
+  },
   logger: false,
 };

@@ -1,11 +1,18 @@
 export const ROLES = {
-  USER: {
-    keyWord: 'user',
-    name: 'Пользователь',
+  TOURIST: {
+    keyWord: 'tourist',
+    name: 'Турист',
+    requiresClient: false,
   },
-  ADMIN: {
-    keyWord: 'admin',
-    name: 'Администратор',
+  CLIENT_ADMIN: {
+    keyWord: 'clientAdmin',
+    name: 'Администратор организации',
+    requiresClient: true,
+  },
+  SHOP_ADMIN: {
+    keyWord: 'shopAdmin',
+    name: 'Администратор магазина',
+    requiresClient: true,
   },
 } as const;
 

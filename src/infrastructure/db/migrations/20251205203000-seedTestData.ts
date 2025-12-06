@@ -1,5 +1,6 @@
 import { QueryInterface } from 'sequelize';
 import crypto, { randomUUID } from 'crypto';
+import { ROLES } from '#Shared/roles';
 
 const tableName = {
   clients: 'clients',
@@ -8,6 +9,8 @@ const tableName = {
   shopAdministrators: 'shopAdministrators',
   products: 'products',
   productTags: 'productTags',
+  userRoles: 'userRoles',
+  userRoleAssignments: 'userRoleAssignments',
 };
 
 // Города России с регионами
@@ -105,6 +108,8 @@ export default {
     const shopAdministrators: any[] = [];
     const products: any[] = [];
     const productTagsData: any[] = [];
+    const userRoles: any[] = [];
+    const userRoleAssignments: any[] = [];
 
     // Создаем клиентов (по одному на каждый город)
     for (let i = 0; i < russianCities.length; i++) {
@@ -119,6 +124,24 @@ export default {
         createdAt: now,
         updatedAt: now,
       });
+
+      // Создаем роли для каждого клиента
+      userRoles.push(
+        {
+          name: ROLES.CLIENT_ADMIN.name,
+          keyWord: ROLES.CLIENT_ADMIN.keyWord,
+          clientGuid: clientGuid,
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          name: ROLES.SHOP_ADMIN.name,
+          keyWord: ROLES.SHOP_ADMIN.keyWord,
+          clientGuid: clientGuid,
+          createdAt: now,
+          updatedAt: now,
+        }
+      );
 
       // Создаем 2-3 магазина для каждого клиента
       const shopsCount = randomInt(2, 3);
@@ -158,7 +181,7 @@ export default {
           phone: `+7${randomInt(900, 999)}${randomInt(1000000, 9999999)}`,
           country: 'Россия',
           age: randomInt(25, 55),
-          clientId: null,
+          clientGuid: clientGuid,
           createdAt: now,
           updatedAt: now,
           deletedAt: null,
@@ -205,15 +228,118 @@ export default {
           }
         }
       }
+
+      // Создаем одного администратора клиента для каждого клиента
+      const clientAdminGuid = randomUUID();
+      users.push({
+        guid: clientAdminGuid,
+        email: `client_admin.${clientGuid.slice(0, 8)}@example.com`,
+        password: hashPassword('password123'),
+        firstName: ['Иван', 'Петр', 'Сергей', 'Александр', 'Дмитрий'][randomInt(0, 4)],
+        lastName: ['Иванов', 'Петров', 'Сидоров', 'Смирнов', 'Кузнецов'][randomInt(0, 4)],
+        patronymicName: ['Иванович', 'Петрович', 'Сергеевич', 'Александрович', 'Дмитриевич'][randomInt(0, 4)],
+        phone: `+7${randomInt(900, 999)}${randomInt(1000000, 9999999)}`,
+        country: 'Россия',
+        age: randomInt(30, 60),
+        clientGuid: clientGuid,
+        createdAt: now,
+        updatedAt: now,
+        deletedAt: null,
+      });
     }
 
-    // Вставляем данные в БД
+    // Создаем несколько туристов (пользователи без привязки к клиенту)
+    for (let i = 0; i < 5; i++) {
+      users.push({
+        guid: randomUUID(),
+        email: `tourist${i + 1}@example.com`,
+        password: hashPassword('password123'),
+        firstName: ['Анна', 'Мария', 'Елена', 'Ольга', 'Татьяна'][i],
+        lastName: ['Иванова', 'Петрова', 'Сидорова', 'Смирнова', 'Кузнецова'][i],
+        patronymicName: ['Ивановна', 'Петровна', 'Сергеевна', 'Александровна', 'Дмитриевна'][i],
+        phone: `+7${randomInt(900, 999)}${randomInt(1000000, 9999999)}`,
+        country: 'Россия',
+        age: randomInt(20, 50),
+        clientGuid: null,
+        createdAt: now,
+        updatedAt: now,
+        deletedAt: null,
+      });
+    }
+
+    // Вставляем данные в БД (сначала вставляем роли и пользователей, чтобы потом создать связи)
     await queryInterface.bulkInsert(tableName.clients, clients, {});
+    await queryInterface.bulkInsert(tableName.userRoles, userRoles, {});
     await queryInterface.bulkInsert(tableName.shops, shops, {});
     await queryInterface.bulkInsert(tableName.users, users, {});
     await queryInterface.bulkInsert(tableName.shopAdministrators, shopAdministrators, {});
     await queryInterface.bulkInsert(tableName.products, products, {});
     await queryInterface.bulkInsert(tableName.productTags, productTagsData, {});
+
+    // Получаем созданные роли для создания связей userRoleAssignments
+    const [rolesFromDb] = await queryInterface.sequelize.query(
+      'SELECT id, "keyWord", "clientGuid" FROM "userRoles"'
+    );
+
+    // Получаем всех пользователей
+    const [usersFromDb] = await queryInterface.sequelize.query(
+      'SELECT guid, "clientGuid" FROM users'
+    );
+
+    // Создаем связи между пользователями и ролями
+    for (const user of usersFromDb as any[]) {
+      if (user.clientGuid) {
+        // Пользователь привязан к клиенту
+        // Проверяем, является ли пользователь администратором магазина
+        const [shopAdmins] = await queryInterface.sequelize.query(
+          `SELECT "userGuid" FROM "shopAdministrators" WHERE "userGuid" = '${user.guid}'`
+        );
+
+        if ((shopAdmins as any[]).length > 0) {
+          // Это администратор магазина
+          const shopAdminRole = (rolesFromDb as any[]).find(
+            (r) => r.keyWord === ROLES.SHOP_ADMIN.keyWord && r.clientGuid === user.clientGuid
+          );
+          if (shopAdminRole) {
+            userRoleAssignments.push({
+              userGuid: user.guid,
+              roleId: shopAdminRole.id,
+              createdAt: now,
+              updatedAt: now,
+            });
+          }
+        } else {
+          // Это администратор клиента
+          const clientAdminRole = (rolesFromDb as any[]).find(
+            (r) => r.keyWord === ROLES.CLIENT_ADMIN.keyWord && r.clientGuid === user.clientGuid
+          );
+          if (clientAdminRole) {
+            userRoleAssignments.push({
+              userGuid: user.guid,
+              roleId: clientAdminRole.id,
+              createdAt: now,
+              updatedAt: now,
+            });
+          }
+        }
+      } else {
+        // Это турист (пользователь без клиента)
+        const touristRole = (rolesFromDb as any[]).find(
+          (r) => r.keyWord === ROLES.TOURIST.keyWord && r.clientGuid === null
+        );
+        if (touristRole) {
+          userRoleAssignments.push({
+            userGuid: user.guid,
+            roleId: touristRole.id,
+            createdAt: now,
+            updatedAt: now,
+          });
+        }
+      }
+    }
+
+    // Вставляем связи пользователей и ролей
+    await queryInterface.bulkInsert(tableName.userRoleAssignments, userRoleAssignments, {});
   },
 
   async down(queryInterface: QueryInterface): Promise<void> {
@@ -221,8 +347,10 @@ export default {
     await queryInterface.bulkDelete(tableName.productTags, {}, {});
     await queryInterface.bulkDelete(tableName.products, {}, {});
     await queryInterface.bulkDelete(tableName.shopAdministrators, {}, {});
+    await queryInterface.bulkDelete(tableName.userRoleAssignments, {}, {});
     await queryInterface.bulkDelete(tableName.users, {}, {});
     await queryInterface.bulkDelete(tableName.shops, {}, {});
+    await queryInterface.bulkDelete(tableName.userRoles, {}, {});
     await queryInterface.bulkDelete(tableName.clients, {}, {});
   },
 };

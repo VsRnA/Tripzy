@@ -9,7 +9,7 @@ import { UnauthorizedError, NotFoundError } from '#Lib/errors';
 import db from '#Infrastructure/sequelize';
 
 httpTransport.handler.post(
-  '/api/clients/v1/shop-administrators/bulk',
+  '/api/clients/v1/shopAdministrators',
   BulkCreateShopAdministratorsSchema,
   async (request) => {
     const apiKey = request.headers['x-api-key'] as string;
@@ -46,7 +46,7 @@ httpTransport.handler.post(
             phone: adminData.phone || null,
             country: adminData.country || null,
             age: adminData.age || null,
-            clientId: client.id,
+            clientGuid: client.guid,
           },
           repOptions,
         );
