@@ -1,0 +1,35 @@
+# Игнорируем node_modules - они устанавливаются внутри контейнера
+node_modules
+
+# Игнорируем скомпилированный код - он создается при сборке
+dist
+
+# Игнорируем файлы Git
+.git
+.gitignore
+
+# Игнорируем Docker файлы
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Игнорируем документацию и вспомогательные файлы
+README.md
+CLAUDE.md
+*.md
+
+# Игнорируем логи
+logs
+*.log
+npm-debug.log*
+
+# Игнорируем временные файлы
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Игнорируем IDE настройки
+.vscode
+.idea
+*.sublime-*

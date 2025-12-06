@@ -1,7 +1,5 @@
 ## Защищенные переменные
 .env
-.dockerignore
-.sequelizerc
 
 ## Собранный проект
 /dist
