@@ -26,3 +26,8 @@ import '#App/shops/handlers/bulkCreate';
 
 // Trip handelrs
 import '#App/trips/handlers/create';
+
+// Favorites handlers
+import '#App/favorites/handlers/add';
+import '#App/favorites/handlers/remove';
+import '#App/favorites/handlers/list';
