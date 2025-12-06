@@ -1,3 +1,5 @@
+import { AuthResponseSchema, UserInputSchema } from './components/user';
+
 export const LoginSchema = {
   tags: ['Auth'],
   summary: 'Авторизация пользователя',
@@ -5,53 +7,15 @@ export const LoginSchema = {
   payload: {
     type: 'object',
     properties: {
-      email: {
-        type: 'string',
-        format: 'email',
-        description: 'Email адрес пользователя',
-      },
-      password: {
-        type: 'string',
-        minLength: 1,
-        description: 'Пароль пользователя',
-      },
+      email: UserInputSchema.properties.email,
+      password: UserInputSchema.properties.password,
     },
     required: ['email', 'password'],
   },
   response: {
     200: {
-      type: 'object',
       description: 'Авторизация прошла успешно',
-      properties: {
-        data: {
-          type: 'object',
-          properties: {
-            user: {
-              type: 'object',
-              properties: {
-                guid: { type: 'string', description: 'Уникальный идентификатор пользователя' },
-                email: { type: 'string', description: 'Email адрес' },
-                firstName: { type: 'string', description: 'Имя пользователя' },
-                roles: {
-                  type: 'array',
-                  description: 'Роли пользователя',
-                  items: {
-                    type: 'object',
-                    properties: {
-                      id: { type: 'number' },
-                      name: { type: 'string' },
-                      keyWord: { type: 'string' },
-                    },
-                  },
-                },
-                createdAt: { type: 'string', description: 'Дата создания' },
-                updatedAt: { type: 'string', description: 'Дата обновления' },
-              },
-            },
-            token: { type: 'string', description: 'JWT токен для авторизации' },
-          },
-        },
-      },
+      ...AuthResponseSchema,
     },
   },
 } as const;

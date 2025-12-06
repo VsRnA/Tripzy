@@ -5,6 +5,7 @@ import {
 import db from '#Infrastructure/sequelize';
 import UserRoleAssignment from '#App/userRoleAssignments/models/userRoleAssignment.model';
 import User from '#App/users/models/user.model';
+import Client from '#App/clients/models/client.model';
 
 export type UserRoleAttributes = Attributes<UserRole>;
 export type UserRoleCreationAttributes = CreationAttributes<UserRole>;
@@ -16,6 +17,8 @@ export default class UserRole extends Model<InferAttributes<UserRole>, InferCrea
   declare name: string;
   /** Ключевое слово роли */
   declare keyWord: string;
+  /** GUID клиента */
+  declare clientGuid: string | null;
   /** Дата создания */
   declare createdAt: CreationOptional<string>;
   /** Дата обновления */
@@ -35,7 +38,10 @@ UserRole.init({
   keyWord: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+  },
+  clientGuid: {
+    type: DataTypes.UUID,
+    allowNull: true,
   },
   createdAt: DataTypes.DATE,
   updatedAt: DataTypes.DATE
@@ -47,6 +53,12 @@ UserRole.init({
 });
 
 db.associate(() => {
+  UserRole.belongsTo(Client, {
+    foreignKey: 'clientGuid',
+    targetKey: 'guid',
+    as: 'client',
+  });
+
   UserRole.belongsToMany(User, {
     through: UserRoleAssignment,
     foreignKey: 'roleId',
