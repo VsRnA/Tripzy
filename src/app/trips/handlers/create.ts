@@ -37,6 +37,8 @@ httpTransport.handler.post('/api/trips/v1', CreateTripSchema, async (request) =>
         orderIndex: cityIndex,
         visitDate: city.visitDate ?? null,
         description: city.description ?? null,
+        latitude: city.latitude,
+        longitude: city.longitude,
       }, repOptions);
 
       if (city.attractions && city.attractions.length > 0) {
@@ -51,6 +53,8 @@ httpTransport.handler.post('/api/trips/v1', CreateTripSchema, async (request) =>
             orderIndex: attractionIndex,
             visitDate: attraction.visitDate ?? null,
             description: attraction.description ?? null,
+            latitude: attraction.latitude,
+            longitude: attraction.longitude,
           }, repOptions);
         }
       }

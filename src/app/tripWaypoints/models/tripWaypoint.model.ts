@@ -31,6 +31,10 @@ export default class TripWaypoint extends Model<InferAttributes<TripWaypoint>, I
   declare visitDate: string | null;
   /** Описание точки маршрута */
   declare description: string | null;
+  /** Широта точки маршрута */
+  declare latitude: number;
+  /** Долгота точки маршрута */
+  declare longitude: number;
 }
 
 TripWaypoint.init({
@@ -66,6 +70,14 @@ TripWaypoint.init({
   description: {
     type: DataTypes.TEXT,
     allowNull: true,
+  },
+  latitude: {
+    type: DataTypes.DECIMAL(10, 8),
+    allowNull: false,
+  },
+  longitude: {
+    type: DataTypes.DECIMAL(11, 8),
+    allowNull: false,
   },
 }, {
   sequelize: db.instance,

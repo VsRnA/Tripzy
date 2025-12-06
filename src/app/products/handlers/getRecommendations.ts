@@ -2,19 +2,30 @@ import { httpTransport } from '#Infrastructure/fastify';
 import { GetRecommendationsSchema } from '../schemas/getRecommendations';
 import { list } from '../repositories/list';
 import { calculateProductWeight } from '../services/calculateProductWeight';
+import { find as findWaypoint } from '#App/tripWaypoints/repositories/find';
 
 httpTransport.handler.get(
   '/api/products/v1/recommendations',
   GetRecommendationsSchema,
   async (request) => {
-    const { tags, craftTypes, materials, region, city, shopGuids } = request.query;
+    const { tags, craftTypes, materials, region, city, waypointGuid, radius } = request.query;
+
+    let waypointCoordinates = undefined;
+    if (waypointGuid) {
+      const waypoint = await findWaypoint({ guid: waypointGuid });
+      waypointCoordinates = {
+        latitude: waypoint.latitude,
+        longitude: waypoint.longitude,
+      };
+    }
 
     const products = await list({
       region,
       city,
-      shopGuids,
       removalMark: false,
       inStock: true,
+      waypointCoordinates,
+      radius,
     });
 
     const productsWithWeight = products.map((product) => {

@@ -39,7 +39,6 @@ export async function find(filters: FindUserFilters, repOptions?: FindOptions) {
     ],
     ...repOptions,
   });
-  console.log(user);
   if (!user) {
     throw new NotFoundError('User not found');
   }

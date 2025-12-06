@@ -8,11 +8,8 @@ import { UnauthorizedError } from '#Lib/errors';
 httpTransport.handler.post('/api/auth/v1/login', LoginSchema, async (request) => {
   const { email, password } = request.payload;
 
-  console.log('kuku3');
-
   const { password: userPassword, ...userData} = await findUser({ email, includePassword: true })
   const isPasswordValid = await comparePassword(password, userPassword);
-  console.log(isPasswordValid);
   if (!isPasswordValid) {
     throw new UnauthorizedError('User', { email });
   }

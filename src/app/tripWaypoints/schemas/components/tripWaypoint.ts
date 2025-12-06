@@ -11,6 +11,8 @@ export const TripWaypointSchema = {
     orderIndex: { type: 'number', description: 'Порядковый номер' },
     visitDate: { type: 'string', nullable: true, description: 'Дата посещения' },
     description: { type: 'string', nullable: true, description: 'Описание' },
+    latitude: { type: 'number', description: 'Широта точки маршрута' },
+    longitude: { type: 'number', description: 'Долгота точки маршрута' },
   },
 } as const;
 
@@ -32,8 +34,20 @@ export const CityInputSchema = {
       type: 'string',
       description: 'Описание города',
     },
+    latitude: {
+      type: 'number',
+      minimum: -90,
+      maximum: 90,
+      description: 'Широта города',
+    },
+    longitude: {
+      type: 'number',
+      minimum: -180,
+      maximum: 180,
+      description: 'Долгота города',
+    },
   },
-  required: ['address'],
+  required: ['address', 'latitude', 'longitude'],
 } as const;
 
 export const AttractionInputSchema = {
@@ -54,6 +68,18 @@ export const AttractionInputSchema = {
       type: 'string',
       description: 'Описание достопримечательности',
     },
+    latitude: {
+      type: 'number',
+      minimum: -90,
+      maximum: 90,
+      description: 'Широта достопримечательности',
+    },
+    longitude: {
+      type: 'number',
+      minimum: -180,
+      maximum: 180,
+      description: 'Долгота достопримечательности',
+    },
   },
-  required: ['address'],
+  required: ['address', 'latitude', 'longitude'],
 } as const;

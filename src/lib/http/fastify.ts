@@ -42,7 +42,6 @@ export class FastifyHttpTransport {
 
   public async start(): Promise<void> {
     try {
-      console.log(this.#app.printRoutes());
       await this.#app.listen({ port: this.#config.port, host: this.#config.host });
       console.log(`Server is running on http://${this.#config.host}:${this.#config.port}`);
     } catch (err) {

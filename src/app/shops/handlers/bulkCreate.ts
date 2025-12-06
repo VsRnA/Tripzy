@@ -37,6 +37,8 @@ httpTransport.handler.post('/api/clients/v1/shops', BulkCreateShopsSchema, async
     city: shop.city,
     region: shop.region,
     schedule: (shop.schedule as ShopSchedule) || null,
+    latitude: shop.latitude,
+    longitude: shop.longitude,
   }));
 
   const shops = await bulkCreateShops(shopsToCreate);

@@ -23,9 +23,11 @@ import '#App/shopAdministrators/handlers/bulkCreate';
 
 // Shop handlers
 import '#App/shops/handlers/bulkCreate';
+import '#App/shops/handlers/list';
 
 // Trip handelrs
 import '#App/trips/handlers/create';
+import '#App/trips/handlers/list';
 
 // Favorites handlers
 import '#App/favorites/handlers/add';

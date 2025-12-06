@@ -48,13 +48,15 @@ export const GetRecommendationsSchema = {
         type: 'string',
         description: 'Город магазина',
       },
-      shopGuids: {
-        type: 'array',
-        items: {
-          type: 'string',
-          format: 'uuid',
-        },
-        description: 'Массив UUID магазинов для фильтрации товаров',
+      waypointGuid: {
+        type: 'string',
+        format: 'uuid',
+        description: 'UUID точки маршрута для поиска магазинов в радиусе',
+      },
+      radius: {
+        type: 'number',
+        minimum: 0,
+        description: 'Радиус поиска в километрах (используется вместе с waypointGuid)',
       },
     },
   },

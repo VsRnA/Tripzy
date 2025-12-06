@@ -29,6 +29,10 @@ export default class Shop extends Model<InferAttributes<Shop>, InferCreationAttr
   declare region: string;
   /** Расписание работы (например: {"monday": "9:00-18:00", "tuesday": "9:00-18:00"}) */
   declare schedule: ShopSchedule | null;
+  /** Широта магазина */
+  declare latitude: number;
+  /** Долгота магазина */
+  declare longitude: number;
   /** Пометка на удаление */
   declare removalMark: CreationOptional<boolean>;
   /** Дата создания */
@@ -67,6 +71,14 @@ Shop.init({
   schedule: {
     type: DataTypes.JSONB,
     allowNull: true,
+  },
+  latitude: {
+    type: DataTypes.DECIMAL(10, 8),
+    allowNull: false,
+  },
+  longitude: {
+    type: DataTypes.DECIMAL(11, 8),
+    allowNull: false,
   },
   removalMark: {
     type: DataTypes.BOOLEAN,
