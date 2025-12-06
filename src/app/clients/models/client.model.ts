@@ -62,10 +62,6 @@ Client.init({
 });
 
 db.associate(() => {
-  Client.hasMany(User, {
-    foreignKey: 'clientId',
-    as: 'users',
-  });
 
   Client.hasMany(Shop, {
     foreignKey: 'clientGuid',
