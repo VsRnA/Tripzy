@@ -10,4 +10,7 @@ COPY . .
 
 EXPOSE 3000
 
+CMD ["npm", "run", "build"]
+CMD ["npm", "run", "db:build"]
+CMD ["npm", "run", "db:migrate"]
 CMD ["npm", "run", "dev"]
