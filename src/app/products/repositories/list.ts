@@ -6,18 +6,19 @@ import { Op, FindOptions } from 'sequelize';
 export interface ListFilters {
   region?: string;
   city?: string;
+  shopGuids?: string[];
   removalMark?: boolean;
   inStock?: boolean;
 }
 
 /**
  * Получает список товаров с фильтрацией
- * @param filters - фильтры по региону, городу, наличию и пометке удаления
+ * @param filters - фильтры по региону, городу, магазинам, наличию и пометке удаления
  * @param repOptions - дополнительные опции для запроса
  * @returns список товаров с их атрибутами и данными магазина
  */
 export async function list(filters: ListFilters = {}, repOptions?: FindOptions): Promise<Product[]> {
-  const { region, city, removalMark = false, inStock = false } = filters;
+  const { region, city, shopGuids, removalMark = false, inStock = false } = filters;
 
   // Базовые условия
   const whereConditions: any = {
@@ -36,6 +37,9 @@ export async function list(filters: ListFilters = {}, repOptions?: FindOptions):
   }
   if (city) {
     shopWhere.city = city;
+  }
+  if (shopGuids && shopGuids.length > 0) {
+    shopWhere.guid = { [Op.in]: shopGuids };
   }
 
   // Получаем товары с атрибутами и данными магазина

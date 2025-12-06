@@ -7,11 +7,12 @@ httpTransport.handler.get(
   '/api/products/v1/recommendations',
   GetRecommendationsSchema,
   async (request) => {
-    const { tags, craftTypes, materials, region, city } = request.query;
+    const { tags, craftTypes, materials, region, city, shopGuids } = request.query;
 
     const products = await list({
       region,
       city,
+      shopGuids,
       removalMark: false,
       inStock: true,
     });
