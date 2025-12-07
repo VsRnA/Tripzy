@@ -1,8 +1,8 @@
+import db from '#Infrastructure/sequelize';
 import {
   Model, InferAttributes, InferCreationAttributes, DataTypes,
   Attributes, CreationAttributes, CreationOptional,
 } from '#Lib/database/sequelize';
-import db from '#Infrastructure/sequelize';
 import Trip from '#App/trips/models/trip.model';
 
 export type TripWaypointAttributes = Attributes<TripWaypoint>;

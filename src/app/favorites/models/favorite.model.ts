@@ -1,10 +1,10 @@
+import db from '#Infrastructure/sequelize';
 import {
   Model, InferAttributes, InferCreationAttributes, DataTypes,
   Attributes, CreationAttributes, CreationOptional,
 } from '#Lib/database/sequelize';
-import db from '#Infrastructure/sequelize';
-import User from '#App/users/models/user.model';
 import Product from '#App/products/models/product.model';
+import User from '#App/users/models/user.model';
 
 export type FavoriteAttributes = Attributes<Favorite>;
 export type FavoriteCreationAttributes = CreationAttributes<Favorite>;

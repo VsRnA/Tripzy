@@ -1,10 +1,10 @@
 import { httpTransport } from '#Infrastructure/fastify';
-import { BulkCreateProductsSchema } from '../schemas/bulkCreate';
-import { bulkCreate as bulkCreateProducts } from '../repositories/bulkCreate';
-import { get as getShop } from '#App/shops/repositories/get';
-import { find as findClient } from '#App/clients/repositories/find';
-import { UnauthorizedError, NotFoundError } from '#Lib/errors';
 import db from '#Infrastructure/sequelize';
+import { UnauthorizedError, NotFoundError } from '#Lib/errors';
+import { find as findClient } from '#App/clients/repositories/find';
+import { get as getShop } from '#App/shops/repositories/get';
+import { bulkCreate as bulkCreateProducts } from '../repositories/bulkCreate';
+import { BulkCreateProductsSchema } from '../schemas/bulkCreate';
 
 httpTransport.handler.post(
   '/api/clients/v1/products',

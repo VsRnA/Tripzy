@@ -1,12 +1,12 @@
 import { httpTransport } from '#Infrastructure/fastify';
-import { BulkCreateShopAdministratorsSchema } from '../schemas/bulkCreate';
+import db from '#Infrastructure/sequelize';
+import { UnauthorizedError, NotFoundError } from '#Lib/errors';
+import { hashPassword } from '#Shared/password';
+import { find as findClient } from '#App/clients/repositories/find';
+import { get as getShop } from '#App/shops/repositories/get';
 import { create as createUser } from '#App/users/repositories/create';
 import { bulkCreate as bulkCreateShopAdministrators } from '../repositories/bulkCreate';
-import { get as getShop } from '#App/shops/repositories/get';
-import { find as findClient } from '#App/clients/repositories/find';
-import { hashPassword } from '#Shared/password';
-import { UnauthorizedError, NotFoundError } from '#Lib/errors';
-import db from '#Infrastructure/sequelize';
+import { BulkCreateShopAdministratorsSchema } from '../schemas/bulkCreate';
 
 httpTransport.handler.post(
   '/api/clients/v1/shopAdministrators',

@@ -1,5 +1,5 @@
-import { config } from '#Shared/config';
 import { SequelizeDB } from '#Lib/database/sequelize';
+import { config } from '#Shared/config';
 
 export default new SequelizeDB({
   username: config.database.user,

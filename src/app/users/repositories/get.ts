@@ -1,6 +1,6 @@
-import User, { UserAttributes } from '#App/users/models/user.model';
-import UserRole from '#App/userRoles/models/userRole.model';
 import { WhereOptions, FindOptions } from 'sequelize';
+import UserRole from '#App/userRoles/models/userRole.model';
+import User, { UserAttributes } from '#App/users/models/user.model';
 
 interface GetUserFilters {
   guid?: string;

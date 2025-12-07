@@ -1,11 +1,11 @@
 import { httpTransport } from '#Infrastructure/fastify';
-import { CreateTripSchema } from '../schemas/create';
-import { create as createTrip } from '../repositories/create';
-import { find as findTrip } from '../repositories/find';
+import db from '#Infrastructure/sequelize';
+import { WaypointType } from '#App/tripWaypoints/models/tripWaypoint.model';
 import { create as createTripWaypoint } from '#App/tripWaypoints/repositories/create';
 import { create as createUserTripsAssignment } from '#App/userTripsAssignment/repositories/create';
-import { WaypointType } from '#App/tripWaypoints/models/tripWaypoint.model';
-import db from '#Infrastructure/sequelize';
+import { create as createTrip } from '../repositories/create';
+import { find as findTrip } from '../repositories/find';
+import { CreateTripSchema } from '../schemas/create';
 
 httpTransport.handler.post('/api/trips/v1', CreateTripSchema, async (request) => {
   const { name, goal, budgetMin, budgetMax, cities } = request.payload;

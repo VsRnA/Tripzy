@@ -17,7 +17,7 @@ export async function plainify<
   M extends Model[] ? Attributes<ArrayElement<M>>[] : M
 > {
   const model = await object;
-  const toPlain = (value: any) => (value?.toJSON && value.toJSON()) || value;
+  const toPlain = (value: any) => (value?.toJSON?.()) || value;
   return Array.isArray(model)
     ? model.map((m) => toPlain(m)) as any
     : toPlain(model);

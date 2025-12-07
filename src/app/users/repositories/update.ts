@@ -1,7 +1,7 @@
-import User, { UserAttributes } from '#App/users/models/user.model';
-import UserRole from '#App/userRoles/models/userRole.model';
 import { UpdateOptions } from 'sequelize';
 import { plainify } from '#Lib/database/sequelize';
+import UserRole from '#App/userRoles/models/userRole.model';
+import User, { UserAttributes } from '#App/users/models/user.model';
 
 type UpdateUserData = {
   email?: UserAttributes['email'];
@@ -16,7 +16,7 @@ type UpdateUserData = {
 export async function update(
   guid: string,
   data: UpdateUserData,
-  repOptions?: UpdateOptions
+  repOptions?: UpdateOptions,
 ) {
   const options = repOptions || {};
 

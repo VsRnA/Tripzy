@@ -1,5 +1,5 @@
-import Favorite from '#App/favorites/models/favorite.model';
 import { DestroyOptions } from 'sequelize';
+import Favorite from '#App/favorites/models/favorite.model';
 
 export async function deleteFavorite(
   filters: Partial<Pick<Favorite, 'userGuid' | 'productGuid'>>,

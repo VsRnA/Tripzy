@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.js
+*.mjs
+*.d.ts
+esbuild.mjs
+esbuild.migrations.mjs
+coverage/
+.git/

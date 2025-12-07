@@ -1,4 +1,4 @@
-import ProductAttribute from '#App/productAttributes/models/productAttribute.model';
+import { ProductAttributeAttributes } from '#App/productAttributes/models/productAttribute.model';
 
 /**
  * Веса для расчета релевантности товара:
@@ -35,7 +35,7 @@ export interface WeightFilters {
  * @returns вес товара (может быть отрицательным при большом количестве несовпадений)
  */
 export function calculateProductWeight(
-  attributes: ProductAttribute[],
+  attributes: ProductAttributeAttributes[],
   filters: WeightFilters,
 ): number {
   const { tags = [], craftTypes = [], materials = [] } = filters;

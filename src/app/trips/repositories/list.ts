@@ -1,8 +1,8 @@
+import { WhereOptions, FindOptions, Op } from 'sequelize';
+import { plainify } from '#Lib/database/sequelize';
 import Trip, { TripStatus, TripGoal } from '#App/trips/models/trip.model';
 import TripWaypoint from '#App/tripWaypoints/models/tripWaypoint.model';
 import User from '#App/users/models/user.model';
-import { WhereOptions, FindOptions, Op } from 'sequelize';
-import { plainify } from '#Lib/database/sequelize';
 
 export interface ListTripFilters {
   guid?: string;

@@ -1,5 +1,5 @@
-import ProductAttribute, { ProductAttributeCreationAttributes } from '#App/productAttributes/models/productAttribute.model';
 import { CreateOptions } from 'sequelize';
+import ProductAttribute, { ProductAttributeCreationAttributes } from '#App/productAttributes/models/productAttribute.model';
 
 export async function create(
   data: ProductAttributeCreationAttributes,

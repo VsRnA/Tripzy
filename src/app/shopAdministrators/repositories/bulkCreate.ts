@@ -1,5 +1,5 @@
-import ShopAdministrator, { ShopAdministratorCreationAttributes } from '#App/shopAdministrators/models/shopAdministrator.model';
 import { BulkCreateOptions } from 'sequelize';
+import ShopAdministrator, { ShopAdministratorCreationAttributes } from '#App/shopAdministrators/models/shopAdministrator.model';
 
 export async function bulkCreate(
   data: ShopAdministratorCreationAttributes[],

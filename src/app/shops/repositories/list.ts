@@ -1,10 +1,10 @@
-import Shop from '#App/shops/models/shop.model';
-import Client from '#App/clients/models/client.model';
-import Product from '#App/products/models/product.model';
-import ProductAttachment from '#App/productAttachments/models/productAttachment.model';
 import { WhereOptions, FindOptions, Op } from 'sequelize';
 import { plainify } from '#Lib/database/sequelize';
 import { calculateDistance, Coordinates } from '#Shared/geo/calculateDistance';
+import Client from '#App/clients/models/client.model';
+import ProductAttachment from '#App/productAttachments/models/productAttachment.model';
+import Product from '#App/products/models/product.model';
+import Shop from '#App/shops/models/shop.model';
 
 export interface ListShopFilters {
   guid?: string;

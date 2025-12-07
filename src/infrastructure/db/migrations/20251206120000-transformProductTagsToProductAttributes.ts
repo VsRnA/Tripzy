@@ -53,7 +53,7 @@ export default {
 
     // 3. Получаем список всех продуктов для добавления тестовых данных
     const [products]: any = await queryInterface.sequelize.query(
-      'SELECT guid FROM products LIMIT 10'
+      'SELECT guid FROM products LIMIT 10',
     );
 
     // 4. Добавляем тестовые данные для типов ремесел
@@ -135,7 +135,7 @@ export default {
           'partner',
           'parents',
           'myself',
-          'other'
+          'other',
         ),
         allowNull: false,
         primaryKey: true,

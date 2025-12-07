@@ -1,8 +1,8 @@
-import User, { UserAttributes } from '#App/users/models/user.model';
-import UserRole from '#App/userRoles/models/userRole.model';
 import { WhereOptions, FindOptions } from 'sequelize';
-import { NotFoundError } from '#Lib/errors';
 import { plainify } from '#Lib/database/sequelize';
+import { NotFoundError } from '#Lib/errors';
+import UserRole from '#App/userRoles/models/userRole.model';
+import User, { UserAttributes } from '#App/users/models/user.model';
 
 interface FindUserFilters {
   guid?: string;

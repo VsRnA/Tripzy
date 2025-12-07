@@ -1,9 +1,9 @@
-import { TripSchema } from './components/trip';
 import {
   CityInputSchema,
   AttractionInputSchema,
   TripWaypointSchema,
 } from '#App/tripWaypoints/schemas/components/tripWaypoint';
+import { TripSchema } from './components/trip';
 
 export const CreateTripSchema = {
   tags: ['Trips'],

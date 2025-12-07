@@ -42,7 +42,7 @@ export class Handler {
     path: string,
     schema: TSchema,
     handler: TypedRouteHandler<InferPayload<TSchema>, InferResponse<TSchema>, InferParams<TSchema>, InferQuery<TSchema>>,
-    options?: RouteOptions
+    options?: RouteOptions,
   ): void {
     const fastifyOptions: RouteShorthandOptions = {};
 
@@ -56,8 +56,11 @@ export class Handler {
           hookHandlers.push(async (request, reply) => {
             await new Promise<void>((resolve, reject) => {
               hook(request, reply, (error) => {
-                if (error) reject(error);
-                else resolve();
+                if (error) {
+                  reject(error);
+                } else {
+                  resolve();
+                }
               });
             });
           });
@@ -115,7 +118,7 @@ export class Handler {
     path: string,
     schema: TSchema,
     handler: TypedRouteHandler<InferPayload<TSchema>, InferResponse<TSchema>, InferParams<TSchema>, InferQuery<TSchema>>,
-    options?: RouteOptions
+    options?: RouteOptions,
   ): void {
     this.#registerRoute('get', path, schema, handler, options);
   }
@@ -124,7 +127,7 @@ export class Handler {
     path: string,
     schema: TSchema,
     handler: TypedRouteHandler<InferPayload<TSchema>, InferResponse<TSchema>, InferParams<TSchema>, InferQuery<TSchema>>,
-    options?: RouteOptions
+    options?: RouteOptions,
   ): void {
     this.#registerRoute('post', path, schema, handler, options);
   }
@@ -133,7 +136,7 @@ export class Handler {
     path: string,
     schema: TSchema,
     handler: TypedRouteHandler<InferPayload<TSchema>, InferResponse<TSchema>, InferParams<TSchema>, InferQuery<TSchema>>,
-    options?: RouteOptions
+    options?: RouteOptions,
   ): void {
     this.#registerRoute('put', path, schema, handler, options);
   }
@@ -142,7 +145,7 @@ export class Handler {
     path: string,
     schema: TSchema,
     handler: TypedRouteHandler<InferPayload<TSchema>, InferResponse<TSchema>, InferParams<TSchema>, InferQuery<TSchema>>,
-    options?: RouteOptions
+    options?: RouteOptions,
   ): void {
     this.#registerRoute('patch', path, schema, handler, options);
   }
@@ -151,7 +154,7 @@ export class Handler {
     path: string,
     schema: TSchema,
     handler: TypedRouteHandler<InferPayload<TSchema>, InferResponse<TSchema>, InferParams<TSchema>, InferQuery<TSchema>>,
-    options?: RouteOptions
+    options?: RouteOptions,
   ): void {
     this.#registerRoute('delete', path, schema, handler, options);
   }

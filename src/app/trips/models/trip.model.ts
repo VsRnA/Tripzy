@@ -1,11 +1,11 @@
+import db from '#Infrastructure/sequelize';
 import {
   Model, InferAttributes, InferCreationAttributes, DataTypes,
   Attributes, CreationAttributes, CreationOptional,
 } from '#Lib/database/sequelize';
-import db from '#Infrastructure/sequelize';
-import UserTripsAssignment from '#App/userTripsAssignment/models/userTripsAssignment.model';
-import User from '#App/users/models/user.model';
 import TripWaypoint from '#App/tripWaypoints/models/tripWaypoint.model';
+import User from '#App/users/models/user.model';
+import UserTripsAssignment from '#App/userTripsAssignment/models/userTripsAssignment.model';
 
 export type TripAttributes = Attributes<Trip>;
 export type TripCreationAttributes = CreationAttributes<Trip>;

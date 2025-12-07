@@ -1,5 +1,5 @@
-import { QueryInterface } from 'sequelize';
 import crypto, { randomUUID } from 'crypto';
+import { QueryInterface } from 'sequelize';
 import { ROLES } from '#Shared/roles';
 
 const tableName = {
@@ -140,7 +140,7 @@ export default {
           clientGuid: clientGuid,
           createdAt: now,
           updatedAt: now,
-        }
+        },
       );
 
       // Создаем 2-3 магазина для каждого клиента
@@ -278,12 +278,12 @@ export default {
 
     // Получаем созданные роли для создания связей userRoleAssignments
     const [rolesFromDb] = await queryInterface.sequelize.query(
-      'SELECT id, "keyWord", "clientGuid" FROM "userRoles"'
+      'SELECT id, "keyWord", "clientGuid" FROM "userRoles"',
     );
 
     // Получаем всех пользователей
     const [usersFromDb] = await queryInterface.sequelize.query(
-      'SELECT guid, "clientGuid" FROM users'
+      'SELECT guid, "clientGuid" FROM users',
     );
 
     // Создаем связи между пользователями и ролями
@@ -292,13 +292,13 @@ export default {
         // Пользователь привязан к клиенту
         // Проверяем, является ли пользователь администратором магазина
         const [shopAdmins] = await queryInterface.sequelize.query(
-          `SELECT "userGuid" FROM "shopAdministrators" WHERE "userGuid" = '${user.guid}'`
+          `SELECT "userGuid" FROM "shopAdministrators" WHERE "userGuid" = '${user.guid}'`,
         );
 
         if ((shopAdmins as any[]).length > 0) {
           // Это администратор магазина
           const shopAdminRole = (rolesFromDb as any[]).find(
-            (r) => r.keyWord === ROLES.SHOP_ADMIN.keyWord && r.clientGuid === user.clientGuid
+            (r) => r.keyWord === ROLES.SHOP_ADMIN.keyWord && r.clientGuid === user.clientGuid,
           );
           if (shopAdminRole) {
             userRoleAssignments.push({
@@ -311,7 +311,7 @@ export default {
         } else {
           // Это администратор клиента
           const clientAdminRole = (rolesFromDb as any[]).find(
-            (r) => r.keyWord === ROLES.CLIENT_ADMIN.keyWord && r.clientGuid === user.clientGuid
+            (r) => r.keyWord === ROLES.CLIENT_ADMIN.keyWord && r.clientGuid === user.clientGuid,
           );
           if (clientAdminRole) {
             userRoleAssignments.push({
@@ -325,7 +325,7 @@ export default {
       } else {
         // Это турист (пользователь без клиента)
         const touristRole = (rolesFromDb as any[]).find(
-          (r) => r.keyWord === ROLES.TOURIST.keyWord && r.clientGuid === null
+          (r) => r.keyWord === ROLES.TOURIST.keyWord && r.clientGuid === null,
         );
         if (touristRole) {
           userRoleAssignments.push({

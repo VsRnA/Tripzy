@@ -1,14 +1,14 @@
+import db from '#Infrastructure/sequelize';
 import {
   Model, InferAttributes, InferCreationAttributes, DataTypes,
   Attributes, CreationAttributes, CreationOptional,
 } from '#Lib/database/sequelize';
-import db from '#Infrastructure/sequelize';
-import UserRoleAssignment from '#App/userRoleAssignments/models/userRoleAssignment.model';
-import UserRole from '#App/userRoles/models/userRole.model';
 import Client from '#App/clients/models/client.model';
 import ShopAdministrator from '#App/shopAdministrators/models/shopAdministrator.model';
-import UserTripsAssignment from '#App/userTripsAssignment/models/userTripsAssignment.model';
 import Trip from '#App/trips/models/trip.model';
+import UserRoleAssignment from '#App/userRoleAssignments/models/userRoleAssignment.model';
+import UserRole from '#App/userRoles/models/userRole.model';
+import UserTripsAssignment from '#App/userTripsAssignment/models/userTripsAssignment.model';
 
 export type UserAttributes = Attributes<User>;
 export type UserCreationAttributes = CreationAttributes<User>;
@@ -33,7 +33,7 @@ export default class User extends Model<InferAttributes<User>, InferCreationAttr
   /** Возраст пользователя */
   declare age: number | null;
   /** GUID клиента */
-  declare clientGuid: string | null; 
+  declare clientGuid: string | null;
   /** Дата создания */
   declare createdAt: CreationOptional<string>;
   /** Дата обновления */
@@ -86,7 +86,7 @@ User.init({
   },
   createdAt: DataTypes.DATE,
   deletedAt: DataTypes.DATE,
-  updatedAt: DataTypes.DATE
+  updatedAt: DataTypes.DATE,
 }, {
   sequelize: db.instance,
   tableName: 'users',

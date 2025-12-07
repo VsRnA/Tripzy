@@ -1,12 +1,12 @@
 import { FastifyRequest, FastifyReply, HookHandlerDoneFunction } from 'fastify';
 import { AppError, UnauthorizedError } from '#Lib/errors';
-import { get as getUser } from '#App/users/repositories/get';
 import { verifyJwt } from '#Shared/jwt';
+import { get as getUser } from '#App/users/repositories/get';
 
 export async function authHook(
   request: FastifyRequest,
   _reply: FastifyReply,
-  done: HookHandlerDoneFunction
+  done: HookHandlerDoneFunction,
 ): Promise<void> {
   try {
     const authHeader = request.headers.authorization;

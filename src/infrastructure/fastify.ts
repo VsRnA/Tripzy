@@ -1,6 +1,6 @@
+import { authHook } from '#Infrastructure/hooks';
 import { FastifyHttpTransport } from '#Lib/http/fastify';
 import { config } from '#Shared/config';
-import { authHook } from '#Infrastructure/hooks';
 
 export const httpTransport = new FastifyHttpTransport({
   port: config.http.port,

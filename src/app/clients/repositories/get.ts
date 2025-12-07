@@ -1,5 +1,5 @@
-import Client from '#App/clients/models/client.model';
 import { FindOptions } from 'sequelize';
+import Client from '#App/clients/models/client.model';
 
 export async function get(
   filters: Partial<Pick<Client, 'id' | 'guid' | 'name' | 'apiKey'>>,

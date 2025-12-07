@@ -1,16 +1,10 @@
-import Favorite from '#App/favorites/models/favorite.model';
 import { FindOptions } from 'sequelize';
+import Favorite from '#App/favorites/models/favorite.model';
 
 export interface GetFavoriteProductGuidsFilters {
   userGuid: string;
 }
 
-/**
- * Получает список GUID продуктов, находящихся в избранном у пользователя
- * @param filters - фильтры по пользователю
- * @param repOptions - дополнительные опции для запроса
- * @returns массив GUID продуктов в избранном
- */
 export async function getFavoriteProductGuids(
   filters: GetFavoriteProductGuidsFilters,
   repOptions?: FindOptions,

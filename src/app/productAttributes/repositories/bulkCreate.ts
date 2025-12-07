@@ -1,5 +1,5 @@
-import ProductAttribute, { ProductAttributeCreationAttributes } from '#App/productAttributes/models/productAttribute.model';
 import { BulkCreateOptions } from 'sequelize';
+import ProductAttribute, { ProductAttributeCreationAttributes } from '#App/productAttributes/models/productAttribute.model';
 
 export async function bulkCreate(
   data: ProductAttributeCreationAttributes[],

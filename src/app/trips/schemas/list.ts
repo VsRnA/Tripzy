@@ -1,5 +1,5 @@
-import { TripSchema, TripGoalEnum } from './components/trip';
 import { TripWaypointSchema } from '#App/tripWaypoints/schemas/components/tripWaypoint';
+import { TripSchema, TripGoalEnum } from './components/trip';
 
 const TripStatusEnum = ['planned', 'active', 'completed', 'cancelled'] as const;
 

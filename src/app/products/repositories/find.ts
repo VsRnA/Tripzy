@@ -1,6 +1,6 @@
-import Product from '#App/products/models/product.model';
 import { FindOptions } from 'sequelize';
 import { NotFoundError } from '#Lib/errors';
+import Product from '#App/products/models/product.model';
 
 export async function find(
   filters: Partial<Pick<Product, 'guid' | 'shopGuid'>>,

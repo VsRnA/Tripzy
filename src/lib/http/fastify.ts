@@ -1,7 +1,7 @@
-import fastify, { FastifyInstance } from 'fastify';
 import multipart from '@fastify/multipart';
-import { Handler } from './handler';
+import fastify, { FastifyInstance } from 'fastify';
 import { errorHandler } from '#Lib/errors';
+import { Handler } from './handler';
 import { Hooks } from './hooks';
 
 interface FastifyConfig {

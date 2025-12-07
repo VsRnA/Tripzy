@@ -1,9 +1,8 @@
+import db from '#Infrastructure/sequelize';
 import {
   Model, InferAttributes, InferCreationAttributes, DataTypes,
   Attributes, CreationAttributes, CreationOptional,
 } from '#Lib/database/sequelize';
-import db from '#Infrastructure/sequelize';
-import User from '#App/users/models/user.model';
 import Shop from '#App/shops/models/shop.model';
 
 export type ClientAttributes = Attributes<Client>;

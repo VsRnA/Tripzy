@@ -1,8 +1,8 @@
+import db from '#Infrastructure/sequelize';
 import {
   Model, InferAttributes, InferCreationAttributes, DataTypes,
   Attributes, CreationAttributes, CreationOptional,
 } from '#Lib/database/sequelize';
-import db from '#Infrastructure/sequelize';
 import Product from '#App/products/models/product.model';
 
 export type ProductAttachmentAttributes = Attributes<ProductAttachment>;

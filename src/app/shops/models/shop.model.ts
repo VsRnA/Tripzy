@@ -1,11 +1,11 @@
+import db from '#Infrastructure/sequelize';
 import {
   Model, InferAttributes, InferCreationAttributes, DataTypes,
   Attributes, CreationAttributes, CreationOptional,
 } from '#Lib/database/sequelize';
-import db from '#Infrastructure/sequelize';
 import Client from '#App/clients/models/client.model';
-import ShopAdministrator from '#App/shopAdministrators/models/shopAdministrator.model';
 import Product from '#App/products/models/product.model';
+import ShopAdministrator from '#App/shopAdministrators/models/shopAdministrator.model';
 
 export type ShopSchedule = {
   [day: string]: string;

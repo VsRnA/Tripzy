@@ -1,16 +1,16 @@
 import { httpTransport } from '#Infrastructure/fastify';
-import { RegisterSchema } from '../schemas/register';
+import db from '#Infrastructure/sequelize';
+import { EntityAlreadyExistedError } from '#Lib/errors';
+import { signJwt } from '#Shared/jwt';
+import { hashPassword } from '#Shared/password';
+import { ROLES } from '#Shared/roles';
+import { create as createUserRoleAssignment } from '#App/userRoleAssignments/repositories/create';
+import { get as getUserRole } from '#App/userRoles/repositories/get';
+import { find as findRole } from '../../userRoles/repositories/find';
 import { create as createUser } from '../repositories/create';
 import { get as getUser } from '../repositories/get';
-import { get as getUserRole } from '#App/userRoles/repositories/get';
-import { create as createUserRoleAssignment } from '#App/userRoleAssignments/repositories/create';
+import { RegisterSchema } from '../schemas/register';
 import { find as findUser } from '../repositories/find';
-import { find as findRole } from '../../userRoles/repositories/find';
-import { hashPassword } from '#Shared/password';
-import { signJwt } from '#Shared/jwt';
-import { ROLES } from '#Shared/roles';
-import { EntityAlreadyExistedError } from '#Lib/errors';
-import db from '#Infrastructure/sequelize';
 
 httpTransport.handler.post('/api/auth/v1/registration', RegisterSchema, async (request) => {
   const { email, password, firstName } = request.payload;

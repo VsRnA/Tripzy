@@ -1,10 +1,10 @@
 import { httpTransport } from '#Infrastructure/fastify';
-import { BulkCreateShopsSchema } from '../schemas/bulkCreate';
-import { bulkCreate as bulkCreateShops } from '../repositories/bulkCreate';
-import { ShopSchedule } from '../models/shop.model';
-import { find as findClient } from '#App/clients/repositories/find';
 import { UnauthorizedError } from '#Lib/errors';
 import { ROLES } from '#Shared/roles';
+import { find as findClient } from '#App/clients/repositories/find';
+import { ShopSchedule } from '../models/shop.model';
+import { bulkCreate as bulkCreateShops } from '../repositories/bulkCreate';
+import { BulkCreateShopsSchema } from '../schemas/bulkCreate';
 
 httpTransport.handler.post('/api/clients/v1/shops', BulkCreateShopsSchema, async (request) => {
   const apiKey = request.headers['x-api-key'] as string;

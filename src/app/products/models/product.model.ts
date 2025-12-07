@@ -1,11 +1,11 @@
+import db from '#Infrastructure/sequelize';
 import {
   Model, InferAttributes, InferCreationAttributes, DataTypes,
-  Attributes, CreationAttributes, CreationOptional,
+  Attributes, CreationAttributes, CreationOptional, NonAttribute,
 } from '#Lib/database/sequelize';
-import db from '#Infrastructure/sequelize';
-import Shop from '#App/shops/models/shop.model';
 import ProductAttachment from '#App/productAttachments/models/productAttachment.model';
 import ProductAttribute from '#App/productAttributes/models/productAttribute.model';
+import Shop from '#App/shops/models/shop.model';
 
 export type ProductAttributes = Attributes<Product>;
 export type ProductCreationAttributes = CreationAttributes<Product>;
@@ -27,6 +27,13 @@ export default class Product extends Model<InferAttributes<Product>, InferCreati
   declare createdAt: CreationOptional<string>;
   /** Дата обновления */
   declare updatedAt: CreationOptional<string>;
+
+  /** Ассоциация: магазин */
+  declare shop?: NonAttribute<Shop>;
+  /** Ассоциация: вложения продукта */
+  declare attachments?: NonAttribute<ProductAttachment[]>;
+  /** Ассоциация: атрибуты продукта */
+  declare attributes?: NonAttribute<ProductAttribute[]>;
 }
 
 Product.init({

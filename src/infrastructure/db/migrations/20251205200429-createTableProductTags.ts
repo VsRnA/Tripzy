@@ -28,7 +28,7 @@ export default {
           'partner',
           'parents',
           'myself',
-          'other'
+          'other',
         ),
         allowNull: false,
         primaryKey: true,

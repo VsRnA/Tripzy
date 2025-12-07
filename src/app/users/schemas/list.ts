@@ -12,8 +12,8 @@ export const ListSchema = {
       description: 'Список пользователей',
       properties: {
         data: {
-          type: 'array',  
-          items: UserFullSchema, 
+          type: 'array',
+          items: UserFullSchema,
         },
       },
     },

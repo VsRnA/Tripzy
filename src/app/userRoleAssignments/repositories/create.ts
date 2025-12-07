@@ -1,5 +1,5 @@
-import UserRoleAssignment from '#App/userRoleAssignments/models/userRoleAssignment.model';
 import { CreateOptions } from 'sequelize';
+import UserRoleAssignment from '#App/userRoleAssignments/models/userRoleAssignment.model';
 
 interface CreateUserRoleAssignmentData {
   userGuid: string;

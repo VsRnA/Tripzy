@@ -1,11 +1,11 @@
+import db from '#Infrastructure/sequelize';
 import {
   Model, InferAttributes, InferCreationAttributes, DataTypes,
   Attributes, CreationAttributes, CreationOptional,
 } from '#Lib/database/sequelize';
-import db from '#Infrastructure/sequelize';
+import Client from '#App/clients/models/client.model';
 import UserRoleAssignment from '#App/userRoleAssignments/models/userRoleAssignment.model';
 import User from '#App/users/models/user.model';
-import Client from '#App/clients/models/client.model';
 
 export type UserRoleAttributes = Attributes<UserRole>;
 export type UserRoleCreationAttributes = CreationAttributes<UserRole>;
@@ -44,7 +44,7 @@ UserRole.init({
     allowNull: true,
   },
   createdAt: DataTypes.DATE,
-  updatedAt: DataTypes.DATE
+  updatedAt: DataTypes.DATE,
 }, {
   sequelize: db.instance,
   tableName: 'userRoles',

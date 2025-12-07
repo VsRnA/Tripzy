@@ -1,8 +1,8 @@
 import { httpTransport } from '#Infrastructure/fastify';
-import { ListShopsSchema } from '../schemas/list';
-import { list as listShops } from '../repositories/list';
 import { getFavoriteProductGuids } from '#App/favorites/repositories/getFavoriteProductGuids';
 import { generateAttachmentUrl } from '#App/productAttachments/services/generateAttachmentUrl';
+import { list as listShops } from '../repositories/list';
+import { ListShopsSchema } from '../schemas/list';
 
 httpTransport.handler.get('/api/clients/v1/shop/list', ListShopsSchema, async (request) => {
   const { latitude, longitude, radius, ...filters } = request.query;

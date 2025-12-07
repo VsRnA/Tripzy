@@ -1,6 +1,6 @@
 import { httpTransport } from '#Infrastructure/fastify';
-import { AddToFavoritesSchema } from '../schemas/add';
 import { create as createFavorites } from '../repositories/create';
+import { AddToFavoritesSchema } from '../schemas/add';
 
 httpTransport.handler.post('/api/favorites/v1', AddToFavoritesSchema, async (request) => {
   const userGuid = request.context.user!.guid;

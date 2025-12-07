@@ -1,6 +1,6 @@
-import UserRole, { UserRoleAttributes } from '#App/userRoles/models/userRole.model';
 import { WhereOptions, FindOptions } from 'sequelize';
 import { NotFoundError } from '#Lib/errors';
+import UserRole, { UserRoleAttributes } from '#App/userRoles/models/userRole.model';
 
 interface FindUserRoleFilters {
   id?: number;

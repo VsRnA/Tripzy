@@ -1,20 +1,14 @@
-import Favorite from '#App/favorites/models/favorite.model';
-import Product from '#App/products/models/product.model';
-import ProductAttachment from '#App/productAttachments/models/productAttachment.model';
-import Shop from '#App/shops/models/shop.model';
-import { plainify } from '#Lib/database/sequelize';
 import { FindOptions } from 'sequelize';
+import { plainify } from '#Lib/database/sequelize';
+import Favorite from '#App/favorites/models/favorite.model';
+import ProductAttachment from '#App/productAttachments/models/productAttachment.model';
+import Product from '#App/products/models/product.model';
+import Shop from '#App/shops/models/shop.model';
 
 export interface ListFilters {
   userGuid?: string;
 }
 
-/**
- * Получает список избранных товаров пользователя
- * @param filters - фильтры по пользователю
- * @param repOptions - дополнительные опции для запроса
- * @returns список избранных товаров с данными о продукте и магазине
- */
 export async function list(filters: ListFilters = {}, repOptions?: FindOptions) {
   const whereConditions: any = {};
 

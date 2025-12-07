@@ -1,6 +1,6 @@
-import Client from '#App/clients/models/client.model';
 import { FindOptions } from 'sequelize';
 import { NotFoundError } from '#Lib/errors';
+import Client from '#App/clients/models/client.model';
 
 export async function find(
   filters: Partial<Pick<Client, 'id' | 'guid' | 'name' | 'apiKey'>>,

@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
-import { schema } from '#Lib/env/schema';
 import { Env } from '#Lib/env/env';
+import { schema } from '#Lib/env/schema';
 
 dotenv.config({ path: '.env' });
 

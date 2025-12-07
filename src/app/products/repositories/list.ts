@@ -1,9 +1,9 @@
-import Product from '#App/products/models/product.model';
-import ProductAttribute from '#App/productAttributes/models/productAttribute.model';
-import ProductAttachment from '#App/productAttachments/models/productAttachment.model';
-import Shop from '#App/shops/models/shop.model';
 import { Op, FindOptions } from 'sequelize';
 import { calculateDistance, Coordinates } from '#Shared/geo/calculateDistance';
+import ProductAttachment from '#App/productAttachments/models/productAttachment.model';
+import ProductAttribute from '#App/productAttributes/models/productAttribute.model';
+import Product from '#App/products/models/product.model';
+import Shop from '#App/shops/models/shop.model';
 
 export interface ListFilters {
   region?: string;

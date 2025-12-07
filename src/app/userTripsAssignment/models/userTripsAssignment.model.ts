@@ -1,8 +1,8 @@
+import db from '#Infrastructure/sequelize';
 import {
   Model, InferAttributes, InferCreationAttributes, DataTypes,
   Attributes, CreationAttributes, CreationOptional,
 } from '#Lib/database/sequelize';
-import db from '#Infrastructure/sequelize';
 
 export type UserTripsAssignmentAttributes = Attributes<UserTripsAssignment>;
 export type UserTripsAssignmentCreationAttributes = CreationAttributes<UserTripsAssignment>;

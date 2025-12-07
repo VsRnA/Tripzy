@@ -1,5 +1,5 @@
-import ProductAttribute from '#App/productAttributes/models/productAttribute.model';
 import { FindOptions } from 'sequelize';
+import ProductAttribute from '#App/productAttributes/models/productAttribute.model';
 
 export async function get(
   filters: Partial<Pick<ProductAttribute, 'productGuid' | 'type' | 'value'>>,

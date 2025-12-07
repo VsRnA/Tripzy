@@ -28,7 +28,7 @@ export type InferPayload<TSchema> = TSchema extends { payload: infer P }
   ? JSONSchemaType<P>
   : unknown;
 
-  export type InferParams<TSchema> = TSchema extends { params: infer P }
+export type InferParams<TSchema> = TSchema extends { params: infer P }
   ? JSONSchemaType<P>
   : unknown;
 

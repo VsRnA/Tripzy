@@ -1,8 +1,7 @@
 import jwt from 'jsonwebtoken';
-import { config } from '#Shared/config';
 import { UnauthorizedError } from '#Lib/errors';
+import { config } from '#Shared/config';
 import { JwtPayload } from './types';
-
 
 export function verifyJwt(token: string): JwtPayload {
   const { secret } = config.jwt;

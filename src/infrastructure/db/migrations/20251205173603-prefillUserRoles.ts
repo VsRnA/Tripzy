@@ -30,7 +30,7 @@ export default {
         keyWord: ROLES.TOURIST.keyWord,
         clientGuid: null,
       } as any,
-      {}
+      {},
     );
   },
 };

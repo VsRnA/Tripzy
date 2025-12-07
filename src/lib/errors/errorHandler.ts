@@ -7,7 +7,7 @@ import { AppError } from './appError';
 export function errorHandler(
   error: Error | FastifyError | AppError,
   request: FastifyRequest,
-  reply: FastifyReply
+  reply: FastifyReply,
 ): void {
   if (error instanceof AppError) {
     reply.status(error.statusCode).send({
