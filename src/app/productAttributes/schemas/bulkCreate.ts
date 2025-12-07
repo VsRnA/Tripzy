@@ -28,7 +28,7 @@ export const BulkCreateProductAttributesSchema = {
             },
             type: {
               type: 'string',
-              enum: ['tag', 'craft_type', 'material'],
+              enum: ['tag', 'craftType', 'material'],
               description: 'Тип атрибута',
             },
             value: {
