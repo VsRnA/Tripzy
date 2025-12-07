@@ -8,9 +8,9 @@ import { create as createUserRoleAssignment } from '#App/userRoleAssignments/rep
 import { get as getUserRole } from '#App/userRoles/repositories/get';
 import { find as findRole } from '../../userRoles/repositories/find';
 import { create as createUser } from '../repositories/create';
+import { find as findUser } from '../repositories/find';
 import { get as getUser } from '../repositories/get';
 import { RegisterSchema } from '../schemas/register';
-import { find as findUser } from '../repositories/find';
 
 httpTransport.handler.post('/api/auth/v1/registration', RegisterSchema, async (request) => {
   const { email, password, firstName } = request.payload;
