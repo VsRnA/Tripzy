@@ -21,4 +21,4 @@ httpTransport.handler.post('/api/clients/v1/register', RegisterClientSchema, asy
   });
 
   return { data: { client } };
-});
+}, { authOnly: false });

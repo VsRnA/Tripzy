@@ -38,6 +38,17 @@ export const GetFavoritesListSchema = {
                       city: { type: 'string', description: 'Город магазина' },
                     },
                   },
+                  attachments: {
+                    type: 'array',
+                    description: 'Вложения (картинки) товара',
+                    items: {
+                      type: 'object',
+                      properties: {
+                        attachmentGuid: { type: 'string', description: 'UUID вложения' },
+                        url: { type: 'string', description: 'URL изображения' },
+                      },
+                    },
+                  },
                 },
               },
             },

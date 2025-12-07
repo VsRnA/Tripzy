@@ -1,5 +1,6 @@
 import Favorite from '#App/favorites/models/favorite.model';
 import Product from '#App/products/models/product.model';
+import ProductAttachment from '#App/productAttachments/models/productAttachment.model';
 import Shop from '#App/shops/models/shop.model';
 import { plainify } from '#Lib/database/sequelize';
 import { FindOptions } from 'sequelize';
@@ -34,6 +35,12 @@ export async function list(filters: ListFilters = {}, repOptions?: FindOptions) 
             as: 'shop',
             required: true,
             attributes: ['guid', 'name', 'region', 'city'],
+          },
+          {
+            model: ProductAttachment,
+            as: 'attachments',
+            required: false,
+            attributes: ['attachmentGuid'],
           },
         ],
       },
