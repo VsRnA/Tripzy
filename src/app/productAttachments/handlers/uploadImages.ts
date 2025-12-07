@@ -75,8 +75,7 @@ httpTransport.handler.post(
 
       for (const file of uploadedFiles) {
         const attachmentGuid = randomUUID();
-        const ext = file.mimetype.split('/')[1];
-        const key = `products/${productGuid}/${attachmentGuid}.${ext}`;
+        const key = `products/${productGuid}/${attachmentGuid}`;
 
         await s3Storage.uploadFile({
           key,
@@ -92,9 +91,8 @@ httpTransport.handler.post(
 
       const attachments = await bulkCreateAttachments(attachmentsData, { transaction });
 
-      const attachmentsWithUrls = attachments.map((attachment, index) => {
-        const ext = uploadedFiles[index].mimetype.split('/')[1];
-        const key = `products/${productGuid}/${attachment.attachmentGuid}.${ext}`;
+      const attachmentsWithUrls = attachments.map((attachment) => {
+        const key = `products/${productGuid}/${attachment.attachmentGuid}`;
         return {
           ...attachment.toJSON(),
           url: s3Storage.getPublicUrl(key),
@@ -106,5 +104,4 @@ httpTransport.handler.post(
 
     return { data: { attachments: result, count: result.length } };
   },
-  { authOnly: false },
 );

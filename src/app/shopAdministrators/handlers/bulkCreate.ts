@@ -82,5 +82,4 @@ httpTransport.handler.post(
 
     return { data: { administrators: result, count: result.length } };
   },
-  { authOnly: false },
 );

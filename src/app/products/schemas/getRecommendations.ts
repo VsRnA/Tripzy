@@ -76,6 +76,7 @@ export const GetRecommendationsSchema = {
               price: { type: 'number', description: 'Цена' },
               quantity: { type: 'number', description: 'Количество на складе' },
               removalMark: { type: 'boolean', description: 'Пометка на удаление' },
+              isFavorite: { type: 'boolean', description: 'Находится ли товар в избранном у пользователя' },
               createdAt: { type: 'string', description: 'Дата создания' },
               updatedAt: { type: 'string', description: 'Дата обновления' },
               shop: {
@@ -97,6 +98,20 @@ export const GetRecommendationsSchema = {
                     type: { type: 'string', description: 'Тип атрибута' },
                     value: { type: 'string', description: 'Значение атрибута' },
                     isCulture: { type: 'boolean', description: 'Привязка к культуре региона' },
+                  },
+                },
+              },
+              attachments: {
+                type: 'array',
+                description: 'Вложения товара (изображения)',
+                items: {
+                  type: 'object',
+                  properties: {
+                    productGuid: { type: 'string', description: 'UUID продукта' },
+                    attachmentGuid: { type: 'string', description: 'UUID вложения' },
+                    url: { type: 'string', description: 'URL изображения' },
+                    createdAt: { type: 'string', description: 'Дата создания' },
+                    updatedAt: { type: 'string', description: 'Дата обновления' },
                   },
                 },
               },

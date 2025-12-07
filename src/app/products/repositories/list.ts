@@ -1,5 +1,6 @@
 import Product from '#App/products/models/product.model';
 import ProductAttribute from '#App/productAttributes/models/productAttribute.model';
+import ProductAttachment from '#App/productAttachments/models/productAttachment.model';
 import Shop from '#App/shops/models/shop.model';
 import { Op, FindOptions } from 'sequelize';
 import { calculateDistance, Coordinates } from '#Shared/geo/calculateDistance';
@@ -41,7 +42,7 @@ export async function list(filters: ListFilters = {}, repOptions?: FindOptions):
     shopWhere.city = city;
   }
 
-  // Получаем товары с атрибутами и данными магазина
+  // Получаем товары с атрибутами, вложениями и данными магазина
   const products = await Product.findAll({
     where: whereConditions,
     include: [
@@ -55,6 +56,11 @@ export async function list(filters: ListFilters = {}, repOptions?: FindOptions):
       {
         model: ProductAttribute,
         as: 'attributes',
+        required: false,
+      },
+      {
+        model: ProductAttachment,
+        as: 'attachments',
         required: false,
       },
     ],

@@ -1,6 +1,7 @@
 import Shop from '#App/shops/models/shop.model';
 import Client from '#App/clients/models/client.model';
 import Product from '#App/products/models/product.model';
+import ProductAttachment from '#App/productAttachments/models/productAttachment.model';
 import { WhereOptions, FindOptions, Op } from 'sequelize';
 import { plainify } from '#Lib/database/sequelize';
 import { calculateDistance, Coordinates } from '#Shared/geo/calculateDistance';
@@ -60,6 +61,13 @@ export async function list(filters: ListShopFilters = {}, repOptions?: FindOptio
         model: Product,
         as: 'products',
         required: false,
+        include: [
+          {
+            model: ProductAttachment,
+            as: 'attachments',
+            required: false,
+          },
+        ],
       },
     ],
     limit: filters.limit || 20,

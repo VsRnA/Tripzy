@@ -43,7 +43,34 @@ export const ShopWithRelationsSchema = {
     products: {
       type: 'array',
       description: 'Товары магазина',
-      items: { type: 'object' },
+      items: {
+        type: 'object',
+        properties: {
+          guid: { type: 'string', description: 'UUID товара' },
+          shopGuid: { type: 'string', description: 'UUID магазина' },
+          name: { type: 'string', description: 'Название товара' },
+          price: { type: 'number', description: 'Цена' },
+          quantity: { type: 'number', description: 'Количество на складе' },
+          removalMark: { type: 'boolean', description: 'Пометка на удаление' },
+          isFavorite: { type: 'boolean', description: 'Находится ли товар в избранном у пользователя' },
+          createdAt: { type: 'string', description: 'Дата создания' },
+          updatedAt: { type: 'string', description: 'Дата обновления' },
+          attachments: {
+            type: 'array',
+            description: 'Вложения товара (изображения)',
+            items: {
+              type: 'object',
+              properties: {
+                productGuid: { type: 'string', description: 'UUID продукта' },
+                attachmentGuid: { type: 'string', description: 'UUID вложения' },
+                url: { type: 'string', description: 'URL изображения' },
+                createdAt: { type: 'string', description: 'Дата создания' },
+                updatedAt: { type: 'string', description: 'Дата обновления' },
+              },
+            },
+          },
+        },
+      },
     },
   },
 } as const;

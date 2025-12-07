@@ -9,13 +9,13 @@ export default {
   async up(queryInterface: QueryInterface): Promise<void> {
     await queryInterface.addColumn(tableName, 'latitude', {
       type: DataTypes.DECIMAL(10, 8),
-      allowNull: true,
+      allowNull: false,
       comment: 'Широта точки маршрута',
     });
 
     await queryInterface.addColumn(tableName, 'longitude', {
       type: DataTypes.DECIMAL(11, 8),
-      allowNull: true,
+      allowNull: false,
       comment: 'Долгота точки маршрута',
     });
 

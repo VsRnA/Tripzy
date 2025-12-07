@@ -54,5 +54,4 @@ httpTransport.handler.post(
 
     return { data: { productAttributes: result, count: result.length } };
   },
-  { authOnly: false },
 );
