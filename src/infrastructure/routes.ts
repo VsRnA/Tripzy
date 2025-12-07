@@ -4,6 +4,7 @@ import '#App/users/handlers/login';
 import '#App/users/handlers/list';
 import '#App/users/handlers/get';
 import '#App/users/handlers/update';
+import '#App/users/handlers/createClientUser';
 
 // Client handlers
 import '#App/clients/handlers/register';
