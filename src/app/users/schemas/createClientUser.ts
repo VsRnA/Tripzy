@@ -42,6 +42,10 @@ export const CreateClientUserSchema = {
           type: 'object',
           properties: {
             user: UserBasicSchema,
+            token: {
+              type: 'string',
+              description: 'JWT токен для авторизации пользователя',
+            },
           },
         },
       },

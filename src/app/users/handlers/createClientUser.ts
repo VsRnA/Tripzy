@@ -1,6 +1,7 @@
 import { httpTransport } from '#Infrastructure/fastify';
 import db from '#Infrastructure/sequelize';
 import { EntityAlreadyExistedError, UnauthorizedError } from '#Lib/errors';
+import { signJwt } from '#Shared/jwt';
 import { hashPassword } from '#Shared/password';
 import { find as findClient } from '#App/clients/repositories/find';
 import { create as createUserRoleAssignment } from '#App/userRoleAssignments/repositories/create';
@@ -65,5 +66,7 @@ httpTransport.handler.post('/api/clients/v1/users', CreateClientUserSchema, asyn
     return userWithRoles;
   });
 
-  return { data: { user } };
+  const token = signJwt({ userGuid: user.guid });
+
+  return { data: { user, token } };
 }, { authOnly: false });

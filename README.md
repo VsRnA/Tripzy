@@ -141,6 +141,12 @@ HTTP Request → Handler → Repository → База данных
 - Node.js 16+
 - PostgreSQL 13+
 - AWS S3 (или совместимое хранилище)
+- Docker и Docker Compose (для запуска в контейнерах)
+
+### Быстрый старт с Docker
+
+Для запуска проекта в Docker-контейнерах смотрите подробную инструкцию:
+**[DOCKER_SETUP.md](DOCKER_SETUP.md)** - руководство по развертыванию в Docker
 
 ### Переменные окружения
 Создайте файл `.env` на основе примера и заполните:
@@ -157,8 +163,8 @@ HTTP Request → Handler → Repository → База данных
 - `npm start` - запуск из скомпилированного dist/
 
 **База данных:**
-- Миграции запускаются автоматически при старте приложения
-- Тестовые данные загружаются через seed-миграции
+- `npm run db:build` - создание базы данных
+- `npm run db:migrate` - применение миграций
 
 **Качество кода:**
 - `npm run lint` - проверка ESLint
@@ -184,9 +190,9 @@ HTTP Request → Handler → Repository → База данных
 
 ## Документация
 
-- [CLAUDE.md](CLAUDE.md) - подробные правила архитектуры проекта
 - [.docs/apiUsageForClients.md](.docs/apiUsageForClients.md) - руководство по Client API
 - [.docs/LINTING.md](.docs/LINTING.md) - правила линтинга
+- [DOCKER_SETUP.md](DOCKER_SETUP.md) - инструкция по запуску в Docker
 
 ## Roadmap
 
